@@ -1,0 +1,20 @@
+<ion-view view-title="Заявка {{requestId}}">
+  <ion-nav-bar>
+    <ion-nav-back-button class="button-clear">Назад
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content class="padding">
+    <div class="list card" ng-show="request">
+
+      <div class="item item-avatar">
+        <h2 ng-bind="request.title"></h2>
+        <p ng-bind="request.date"></p>
+      </div>
+
+      <div class="item item-body">
+        <img class="full-image" ng-src="{{request.image}}">
+        <p ng-bind="request.description"></p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

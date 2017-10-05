@@ -1,0 +1,30 @@
+<ion-view view-title="Мої заявки">
+  <ion-nav-bar>
+    <ion-nav-back-button class="button-clear">Назад
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content class="padding">
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
+    </ion-refresher>
+    <div class="list">
+      <div class="bar bar-header item-input-inset">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios-search placeholder-icon"></i>
+          <input type="search" placeholder="Пошук" ng-model="searchString">
+        </label>
+        <button class="button button-clear" ng-click="resetSearch()">
+          Відміна
+        </button>
+      </div>
+
+      <a class="item item-thumbnail-left" ng-href="#/request/{{request.ID}}" ng-repeat="request in requests | filter: {Message: searchString}">
+        <img ng-bind="{{request.ID}}">
+        <h2 ng-bind="request.Fullname"></h2>
+        <p ng-bind="request.Message"></p>
+        <p ng-bind="request.Category"></p>
+        <p ng-bind="request.Status"></p>
+      </a>
+
+    </div>
+  </ion-content>
+</ion-view>

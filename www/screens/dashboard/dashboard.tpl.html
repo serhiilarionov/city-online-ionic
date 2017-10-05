@@ -1,0 +1,118 @@
+<ion-view view-title="Кабінет">
+  <ion-nav-buttons side="right">
+    <button class="button" ng-click="logout()">
+      Вихід
+    </button>
+  </ion-nav-buttons>
+  <ion-content class="padding">
+    <img class="logo" src="img/logo.png">
+    <div class="row">
+      <div class="col">
+        <button class="button button-block button-outline button-balanced" ng-click="openNewRequestModal()">
+          <i class="icon ion-plus"></i>
+          Подати заявку
+        </button>
+        <a ui-sref="info" class="button button-block button-outline button-balanced">
+          Інформація
+        </a>
+      </div>
+      <div class="col">
+        <a ui-sref="requestList" class="button button-block button-outline button-balanced">
+          <i class="icon ion-link"></i>
+          Мої заявки
+        </a>
+        <a ui-sref="settings" class="button button-block button-outline button-balanced">
+          Налаштування
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <a ui-sref="map" class="button button-block button-outline button-balanced">
+          Мапа
+        </a>
+      </div>
+    </div>
+    <script id="new-request.tpl" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar>
+          <button class="button" ng-click="closeNewRequestModal()" translate="Cancel">Cancel</button>
+          <h1 class="title" translate="New bid">New bid</h1>
+          <button class="button" ng-click="sendRequest()" translate="Submit">Submit</button>
+        </ion-header-bar>
+        <ion-content class="padding new-request-wrapper">
+          <img ng-src="{{newRequest.requestPhoto}}" ng-show="newRequest.requestPhoto" style="max-width: 100%"/>
+          <div class="list">
+            <label class="item item-input item-select">
+              <span class="input-label" translate="Street">Street</span>{{newRequest.bid_street}}
+              <select ng-model="newRequest.bid_street" ng-change="goToAddress()" ng-options="street.Name as street.Name for street in streets"></select>
+            </label>
+            <div class="row no-padding-top no-padding-left no-padding-right">
+              <div class="col no-padding-top no-padding-left no-padding-right">
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label" translate="House">House</span>
+                  <input type="number" placeholder="{{ 'House number' | translate }}" ng-model="newRequest.bid_building" ng-change="goToAddress()">
+                </label>
+              </div>
+              <div class="col no-padding-top no-padding-left no-padding-right">
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label" translate="Flat">Flat</span>
+                  <input type="number" placeholder="{{ 'Flat number' | translate }}" ng-model="newRequest.bid_flat">
+                </label>
+              </div>
+            </div>
+            <div class="row no-padding-left no-padding-right">
+              <div class="col">
+                <ui-gmap-google-map center='map.center' control="map.control" zoom='map.zoom' options="map.options" dragging="map.draggable"></ui-gmap-google-map>
+              </div>
+            </div>
+            <label class="item item-toggle">{{ 'Use my courent position' | translate }}
+              <label class="toggle toggle-balanced">
+                <input type="checkbox" ng-model="map.useGPS" ng-change="toggleGpsUsing()">
+                <div class="track">
+                  <div class="handle"></div>
+                </div>
+              </label>
+            </label>
+            <fieldset ng-show="!map.useGPS">
+              <legend translate="Home address">Home address</legend>
+              <label class="item item-input item-select">
+                <span class="input-label" translate="Street">Street</span>{{newRequest.street}}
+                <select ng-model="newRequest.street" ng-options="street.Name as street.Name for street in streets"></select>
+              </label>
+              <div class="row no-padding-top no-padding-left no-padding-right">
+                <div class="col no-padding-top no-padding-left no-padding-right">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate="House">House</span>
+                    <input type="number" placeholder="{{ 'House number' | translate }}" ng-model="newRequest.building">
+                  </label>
+                </div>
+                <div class="col no-padding-top no-padding-left no-padding-right">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate="Flat">Flat</span>
+                    <input type="number" placeholder="{{ 'Flat number' | translate }}" ng-model="newRequest.flat">
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+            <label class="item item-input item-select">
+              <span class="input-label" translate="Category">Category</span>
+              <select ng-model="newRequest.category" ng-options="requestCategory as requestCategory.name for requestCategory in requestCategories"></select>
+            </label>
+            <label class="item item-input item-select" ng-show="newRequest.category">
+              <span class="input-label" translate="Subcategory">Subcategory</span>
+              <select ng-model="newRequest.subcategory" ng-options="subcategory.id as subcategory.name for subcategory in newRequest.category.subcategories"></select>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label" translate="Content">Content</span>
+              <textarea cols="10" rows="10" placeholder="{{ 'Text description of the application' | translate }}" ng-model="newRequest.description"></textarea>
+            </label>
+          </div>
+          <button class="button button-full button-positive" ng-click="showPhotoSourcePopup()" translate="Add photo">
+            <i class="icon ion-plus"></i>
+            Add photo</button>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+  </ion-content>
+</ion-view>

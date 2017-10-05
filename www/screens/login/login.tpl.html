@@ -1,0 +1,103 @@
+<ion-view view-title="City Online Mobile">
+  <ion-nav-bar>
+    <ion-nav-buttons class="right">
+      <button class="button button-clear button-positive" ng-click="ChangeLanguage('en')">EN</button>
+      <button class="button button-clear button-positive" ng-click="ChangeLanguage('ua')">UA</button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content class="padding">
+    <img class="logo" src="img/logo.png">
+    <div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label" translate="Login">Login</span>
+        <input type="text" placeholder="{{ 'Login' | translate }}" ng-model="loginForm.login">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label" translate="Password">Password</span>
+        <input vl-password type="password" placeholder="{{ 'Password' | translate }}" ng-model="loginForm.password">
+      </label>
+    </div>
+    <button class="button button-block button-positive" ng-click="signIn()" ng-disabled="loginForm.invalid" translate="Log In">Log In</button>
+    <button class="button button-block button-clear button-positive" ng-click="openModalForgot()" translate="Forget password?">Forget password?</button>
+    <button class="button button-block button-clear button-positive" ng-click="openModal()" translate="Register in the system">Register in the system</button>
+    <script id="registration.tpl" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar>
+          <h1 class="title" translate="Registration">Registration</h1>
+          <button class="button" ng-click="closeModal()" translate="Cancel">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label" translate="Login">Login</span>
+              <input type="text" placeholder="user123" ng-model="registrForm.userName">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Email</span>
+              <input type="email" placeholder="user@example.com" ng-model="registrForm.email">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label" translate="Password">Password</span>
+              <input type="password" ng-model="registrForm.password">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label" translate="Repeat password">Repeat password</span>
+              <input type="password" ng-model="registrForm.passwordRepeat">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label" translate="Surname">Surname</span>
+              <input type="text" placeholder="{{ 'Ivanov' | translate }}" ng-model="registrForm.surname">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label" translate="Name">Name</span>
+              <input type="text" placeholder="{{ 'Ivan' | translate }}" ng-model="registrForm.name">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label" translate="Patronymic">Patronymic</span>
+              <input type="text" placeholder="{{ 'Ivanovich' | translate }}" ng-model="registrForm.otch">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label" translate="Phone">Phone</span>
+              <input type="tel" placeholder="+38 0XX XXX XX XX" ng-model="registrForm.telephone">
+            </label>
+            <label class="item item-input item-select">
+              <span class="input-label" translate="City">City</span>
+              <select ng-model="registrForm.city" ng-options="city.city_id as city.name_ru for city in cities"></select>
+            </label>
+            <label class="item item-input item-select">
+              <span class="input-label" translate="Street">Street</span>
+              <select ng-model="registrForm.street" ng-options="street.ID as street.Name for street in streets"></select>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label" translate="House">House</span>
+              <input type="text" placeholder="1" ng-model="registrForm.building">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label" translate="Flat">Flat</span>
+              <input type="text" placeholder="1" ng-model="registrForm.flat">
+            </label>
+          </div>
+          <button class="button button-full button-positive" ng-disabled="registrForm.invalid" ng-click="signUp()" translate="Sign up">Sign up</button>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+    <script id="forgot.tpl" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar>
+          <h1 class="title" translate="Password recovery">Password recovery</h1>
+          <button class="button" ng-click="closeModalForgot()" translate="Cancel">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Email</span>
+              <input type="email" placeholder="user@example.com" ng-model="forgotForm.email">
+            </label>
+          </div>
+          <button class="button button-full button-positive" ng-click="forgot()" ng-disabled="forgotForm.invalid" translate="Next">Next</button>
+        </ion-content>
+      </ion-modal-view>
+
+    </script>
+  </ion-content>
+</ion-view>

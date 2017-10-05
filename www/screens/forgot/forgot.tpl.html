@@ -1,0 +1,26 @@
+<ion-view view-title="City Online Mobile">
+  <ion-nav-bar>
+    <ion-nav-buttons class="right">
+      <button class="button button-clear button-positive" ng-click="ChangeLanguage('en')">EN</button>
+      <button class="button button-clear button-positive" ng-click="ChangeLanguage('ua')">UA</button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content class="padding">
+    <img class="logo" src="img/logo.png">
+    <div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label" translate="Verification code">Verification code</span>
+        <input type="text" placeholder="{{ 'Verification code' | translate }}" ng-model="forgotForm.hash">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label" translate="Password">Password</span>
+        <input vl-password type="password" placeholder="{{ 'Password' | translate }}" ng-model="forgotForm.password">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label" translate="Repeat password">Repeat password</span>
+        <input vl-password type="password" placeholder="{{ 'Repeat password' | translate }}" ng-model="forgotForm.passwordConfirm">
+      </label>
+    </div>
+    <button class="button button-block button-positive" ng-click="forgot()" ng-disabled="forgotForm.invalid" translate="Next">Next</button>
+  </ion-content>
+</ion-view>
